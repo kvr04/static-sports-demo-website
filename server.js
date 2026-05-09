@@ -6,8 +6,17 @@ dotenv.config();
 
 const app = express();
 
+/* =========================
+   MIDDLEWARE
+========================= */
+
 app.use(express.static("public"));
+
 app.use(express.json());
+
+/* =========================
+   EMAIL ROUTE
+========================= */
 
 app.post("/send-email", async (req, res) => {
 
@@ -21,17 +30,55 @@ app.post("/send-email", async (req, res) => {
 
     try {
 
+        /* =========================
+           TRANSPORTER
+        ========================= */
+
         const transporter =
         nodemailer.createTransport({
 
-            service: "gmail",
+            host: "smtp.gmail.com",
+
+            port: 587,
+
+            secure: false,
 
             auth: {
 
                 user: process.env.EMAIL,
+
                 pass: process.env.PASSWORD
+            },
+
+            tls: {
+                rejectUnauthorized: false
             }
         });
+
+        /* =========================
+           VERIFY CONNECTION
+        ========================= */
+
+        transporter.verify((error, success) => {
+
+            if(error){
+
+                console.log(
+                    "SMTP ERROR:",
+                    error
+                );
+
+            }else{
+
+                console.log(
+                    "Email Server Ready"
+                );
+            }
+        });
+
+        /* =========================
+           SEND EMAIL
+        ========================= */
 
         await transporter.sendMail({
 
@@ -41,28 +88,80 @@ app.post("/send-email", async (req, res) => {
 
             subject: "New Sports Registration",
 
-            text: `
-New Registration
+            html: `
 
-Name: ${name}
-Age: ${age}
-Weight: ${weight}
-Sport: ${sport}
-Timing: ${timing}
+            <h2>
+                New Sports Registration
+            </h2>
+
+            <hr>
+
+            <p>
+                <b>Name:</b>
+                ${name}
+            </p>
+
+            <p>
+                <b>Age:</b>
+                ${age}
+            </p>
+
+            <p>
+                <b>Weight:</b>
+                ${weight}
+            </p>
+
+            <p>
+                <b>Sport:</b>
+                ${sport}
+            </p>
+
+            <p>
+                <b>Preferred Timing:</b>
+                ${timing}
+            </p>
+
             `
         });
 
-        res.send("Form Submitted Successfully");
+        console.log(
+            "Email Sent Successfully"
+        );
+
+        res.status(200).send(
+            "Form Submitted Successfully"
+        );
 
     } catch (error) {
 
-        console.log(error);
+        console.log(
+            "EMAIL ERROR:",
+            error
+        );
 
-        res.send("Error Sending Email");
+        res.status(500).send(
+            "Error Sending Email"
+        );
     }
 });
 
-const PORT = process.env.PORT || 3000;
+/* =========================
+   HOME ROUTE
+========================= */
+
+app.get("/", (req, res) => {
+
+    res.sendFile(
+        __dirname + "/public/index.html"
+    );
+});
+
+/* =========================
+   SERVER
+========================= */
+
+const PORT =
+process.env.PORT || 3000;
 
 app.listen(PORT, () => {
 

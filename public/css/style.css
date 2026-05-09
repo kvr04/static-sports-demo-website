@@ -1,0 +1,813 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+    -webkit-scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:linear-gradient(
+    135deg,
+    #000000,
+    #050505,
+    #0a0a0a,
+    #111111
+);
+
+    background-size:400% 400%;
+
+    animation:bgAnimation 12s ease infinite;
+
+    color:white;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+}
+
+/* =========================
+   BACKGROUND ANIMATION
+========================= */
+
+@keyframes bgAnimation{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#111827;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+        to bottom,
+        cyan,
+        violet
+    );
+
+    border-radius:20px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 60px;
+
+    background:rgba(255,255,255,0.05);
+
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    background:linear-gradient(
+        to right,
+        cyan,
+        violet,
+        pink
+    );
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:logoGlow 3s infinite;
+}
+
+@keyframes logoGlow{
+
+    0%{
+        filter:drop-shadow(0 0 5px cyan);
+    }
+
+    50%{
+        filter:drop-shadow(0 0 20px violet);
+    }
+
+    100%{
+        filter:drop-shadow(0 0 5px cyan);
+    }
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav a{
+
+    text-decoration:none;
+
+    color:white;
+
+    margin-left:25px;
+
+    font-size:17px;
+
+    position:relative;
+
+    transition:0.3s;
+}
+
+nav a::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:0%;
+
+    height:2px;
+
+    left:0;
+
+    bottom:-5px;
+
+    background:cyan;
+
+    transition:0.3s;
+}
+
+nav a:hover::after{
+
+    width:100%;
+}
+
+nav a:hover{
+
+    color:cyan;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+
+    height:90vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+}
+
+.hero h1{
+
+    font-size:80px;
+
+    background:linear-gradient(
+        to right,
+        cyan,
+        violet,
+        pink
+    );
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:floatText 4s ease infinite;
+}
+
+.hero p{
+
+    margin-top:20px;
+
+    font-size:24px;
+
+    color:#cbd5e1;
+
+    max-width:700px;
+
+    line-height:1.6;
+}
+
+@keyframes floatText{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+
+    margin-top:30px;
+
+    display:inline-block;
+
+    padding:14px 30px;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        to right,
+        cyan,
+        violet
+    );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    transition:0.4s;
+}
+
+.btn:hover{
+
+    transform:translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 0 10px cyan,
+        0 0 20px violet;
+}
+/* =========================
+   SECTION TITLES
+========================= */
+
+.section-title{
+
+    text-align:center;
+
+    font-size:45px;
+
+    margin-bottom:50px;
+
+    margin-top:20px;
+
+    background:linear-gradient(
+        to right,
+        cyan,
+        violet
+    );
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+}
+
+/* =========================
+   SPORTS SECTION
+========================= */
+
+.sports-section{
+
+    padding:60px;
+}
+
+.sports-container{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap:35px;
+}
+
+/* =========================
+   CARD DESIGN
+========================= */
+
+.card{
+
+    background:rgba(255,255,255,0.08);
+
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    transition:0.4s;
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+        0 0 10px cyan,
+        0 0 20px violet;
+}
+
+/* =========================
+   CARD IMAGE
+========================= */
+
+.card img{
+
+    width:100%;
+
+    height:230px;
+
+    object-fit:cover;
+
+    transition:0.4s;
+}
+
+.card:hover img{
+
+    transform:scale(1.05);
+}
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content{
+
+    padding:25px;
+}
+
+.card-content h2{
+
+    margin-bottom:15px;
+
+    font-size:28px;
+}
+
+.card-content p{
+
+    color:#cbd5e1;
+
+    line-height:1.6;
+}
+
+/* =========================
+   SPORT DETAILS PAGE
+========================= */
+
+.sport-details{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:50px auto;
+
+    background:rgba(255,255,255,0.08);
+
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+
+    border-radius:20px;
+
+    padding:40px;
+}
+
+.sport-details img{
+
+    width:100%;
+
+    border-radius:20px;
+
+    margin-bottom:30px;
+}
+
+.sport-details h1{
+
+    font-size:50px;
+
+    margin-bottom:20px;
+
+    color:cyan;
+}
+
+.sport-details h2{
+
+    margin-top:30px;
+
+    margin-bottom:15px;
+
+    color:violet;
+}
+
+.sport-details p,
+.sport-details li{
+
+    color:#d1d5db;
+
+    line-height:1.8;
+
+    font-size:18px;
+}
+
+.sport-details ul{
+
+    margin-left:20px;
+}
+
+/* =========================
+   EQUIPMENT SECTION
+========================= */
+
+.equipment-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    margin-top:30px;
+}
+
+.equipment-card{
+
+    background:rgba(255,255,255,0.06);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    text-align:center;
+
+    transition:0.3s;
+}
+
+.equipment-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 0 15px cyan;
+}
+
+.equipment-card img{
+
+    width:100%;
+
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    margin-bottom:15px;
+}
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.form-container{
+
+    width:450px;
+
+    max-width:90%;
+
+    margin:80px auto;
+
+    background:rgba(255,255,255,0.08);
+
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+
+    padding:40px;
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+        0 0 20px rgba(0,0,0,0.3);
+}
+
+.form-container h1{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    font-size:38px;
+
+    background:linear-gradient(
+        to right,
+        cyan,
+        violet
+    );
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.form-container input,
+.form-container select{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.1);
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:0.3s;
+}
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.form-container input::placeholder{
+
+    color:#cbd5e1;
+}
+
+/* =========================
+   INPUT FOCUS
+========================= */
+
+.form-container input:focus,
+.form-container select:focus{
+
+    border:1px solid cyan;
+
+    box-shadow:
+        0 0 10px cyan;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.form-container select{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#1f1f1f;
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:0.3s;
+
+    cursor:pointer;
+}
+
+.form-container button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 10px cyan,
+        0 0 20px violet;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    text-align:center;
+
+    padding:30px;
+
+    margin-top:50px;
+
+    background:rgba(255,255,255,0.05);
+
+    color:#cbd5e1;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media(max-width:992px){
+
+    .hero h1{
+
+        font-size:60px;
+    }
+
+    header{
+
+        padding:20px 30px;
+    }
+}
+
+@media(max-width:768px){
+
+    header{
+
+        flex-direction:column;
+    }
+
+    nav{
+
+        margin-top:15px;
+    }
+
+    nav a{
+
+        display:inline-block;
+
+        margin:10px;
+    }
+
+    .hero{
+
+        height:auto;
+
+        padding:100px 20px;
+    }
+
+    .hero h1{
+
+        font-size:45px;
+    }
+
+    .hero p{
+
+        font-size:18px;
+    }
+
+    .sports-section{
+
+        padding:30px;
+    }
+
+    .section-title{
+
+        font-size:35px;
+    }
+
+    .sport-details{
+
+        padding:25px;
+    }
+
+    .sport-details h1{
+
+        font-size:38px;
+    }
+}
+
+@media(max-width:480px){
+
+    .hero h1{
+
+        font-size:36px;
+    }
+
+    .logo{
+
+        font-size:28px;
+    }
+
+    .form-container{
+
+        padding:25px;
+    }
+
+    .section-title{
+
+        font-size:30px;
+    }
+}
+
+/* =========================
+   DROPDOWN OPTIONS FIX
+========================= */
+
+.form-container select{
+
+    background:#1f1f1f;
+
+    color:white;
+}
+
+/* DROPDOWN OPTIONS */
+
+.form-container select option{
+
+    background:#111111;
+
+    color:white;
+
+    padding:10px;
+}
+
+/* OPTIONAL HOVER LOOK */
+
+.form-container select option:hover{
+
+    background:cyan;
+
+    color:black;
+}

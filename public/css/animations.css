@@ -1,0 +1,255 @@
+/* =========================
+   CARD INITIAL ANIMATION
+========================= */
+
+.card{
+
+    opacity:0;
+
+    transform:
+    translateY(50px);
+
+    transition:
+    0.8s ease;
+}
+
+/* SHOW CARD */
+
+.show-card{
+
+    opacity:1;
+
+    transform:
+    translateY(0px);
+}
+
+/* =========================
+   FLOATING PARTICLES
+========================= */
+
+.particle{
+
+    position:fixed;
+
+    width:6px;
+    height:6px;
+
+    background:cyan;
+
+    border-radius:50%;
+
+    opacity:0.5;
+
+    pointer-events:none;
+
+    animation:
+    floatParticle linear infinite;
+
+    top:100vh;
+
+    z-index:-1;
+}
+
+@keyframes floatParticle{
+
+    from{
+
+        transform:
+        translateY(0px);
+
+        opacity:0;
+    }
+
+    20%{
+
+        opacity:0.6;
+    }
+
+    to{
+
+        transform:
+        translateY(-120vh);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   CURSOR GLOW
+========================= */
+
+.cursor-glow{
+
+    position:absolute;
+
+    width:140px;
+    height:140px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,255,255,0.12),
+        transparent 75%
+    );
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    transition:
+    transform 0.1s linear;
+
+    filter:blur(10px);
+}
+
+/* =========================
+   HERO GLOW ANIMATION
+========================= */
+
+.hero h1{
+
+    text-shadow:
+        0 0 8px cyan,
+        0 0 16px violet;
+
+    animation:
+        floatText 4s ease infinite,
+        glowText 2s ease infinite;
+}
+
+@keyframes glowText{
+
+    0%{
+
+        text-shadow:
+            0 0 10px cyan,
+            0 0 20px violet;
+    }
+
+    50%{
+
+        text-shadow:
+            0 0 20px cyan,
+            0 0 40px pink;
+    }
+
+    100%{
+
+        text-shadow:
+            0 0 10px cyan,
+            0 0 20px violet;
+    }
+}
+
+/* =========================
+   BUTTON PULSE
+========================= */
+
+.btn{
+
+    animation:
+    pulseButton 2s infinite;
+}
+
+@keyframes pulseButton{
+
+    0%{
+
+        box-shadow:
+        0 0 0px cyan;
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 12px cyan;
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 0px cyan;
+    }
+}
+
+/* =========================
+   IMAGE HOVER EFFECT
+========================= */
+
+.card img{
+
+    transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.card:hover img{
+
+    transform:scale(1.08);
+
+    filter:brightness(1.1);
+}
+
+/* =========================
+   FORM GLOW
+========================= */
+
+.form-container{
+
+    animation:
+    formGlow 4s ease infinite;
+}
+
+@keyframes formGlow{
+
+    0%{
+
+        box-shadow:
+        0 0 15px rgba(0,255,255,0.2);
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 30px rgba(139,92,246,0.4);
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 15px rgba(0,255,255,0.2);
+    }
+}
+
+/* =========================
+   NAVBAR BLUR EFFECT
+========================= */
+
+header{
+
+    animation:
+    navGlow 5s infinite;
+}
+
+@keyframes navGlow{
+
+    0%{
+
+        box-shadow:
+        0 0 10px rgba(0,255,255,0.1);
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 20px rgba(139,92,246,0.3);
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 10px rgba(0,255,255,0.1);
+    }
+}

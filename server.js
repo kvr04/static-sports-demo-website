@@ -1,6 +1,13 @@
+const OpenAI = require("openai");
 const express = require("express");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
+const openai =
+new OpenAI({
+
+    apiKey:
+    process.env.OPENAI_API_KEY
+});
 
 dotenv.config();
 
@@ -162,6 +169,72 @@ app.get("/", (req, res) => {
 
 const PORT =
 process.env.PORT || 3000;
+/* =========================
+   AI CHATBOT
+========================= */
+
+app.post("/chat", async (req, res) => {
+
+    try{
+
+        const {
+            message
+        } = req.body;
+
+        const completion =
+        await openai.chat.completions.create({
+
+            model:"gpt-4.1-mini",
+
+            messages:[
+
+                {
+                    role:"system",
+
+                    content:`
+You are an AI Sports Coach.
+
+You explain:
+- sports rules
+- techniques
+- health
+- exercises
+- foods to eat
+- foods to avoid
+- sports training
+
+Give short professional answers.
+                    `
+                },
+
+                {
+                    role:"user",
+
+                    content:message
+                }
+            ]
+        });
+
+        res.json({
+
+            reply:
+            completion
+            .choices[0]
+            .message
+            .content
+        });
+
+    }catch(error){
+
+        console.log(error);
+
+        res.json({
+
+            reply:
+            "AI is currently unavailable."
+        });
+    }
+});
 
 app.listen(PORT, () => {
 

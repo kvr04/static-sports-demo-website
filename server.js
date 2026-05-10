@@ -1,15 +1,22 @@
-const OpenAI = require("openai");
 const express = require("express");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
+
+const OpenAI =
+require("openai").OpenAI;
+
+dotenv.config();
+
+/* =========================
+   OPENAI
+========================= */
+
 const openai =
 new OpenAI({
 
     apiKey:
     process.env.OPENAI_API_KEY
 });
-
-dotenv.config();
 
 const app = express();
 

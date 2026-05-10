@@ -811,3 +811,112 @@ footer{
 
     color:black;
 }
+
+/* =========================
+   MODERN SUBMIT BUTTON
+========================= */
+
+#submitBtn{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:linear-gradient(
+        135deg,
+        #00e5ff,
+        #7c4dff,
+        #ff4fd8
+    );
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:0.4s;
+
+    box-shadow:
+        0 0 10px cyan,
+        0 0 20px violet;
+}
+
+/* BUTTON HOVER */
+
+#submitBtn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 0 20px cyan,
+        0 0 35px violet;
+}
+
+/* BUTTON ACTIVE */
+
+#submitBtn:active{
+
+    transform:scale(0.98);
+}
+
+/* DISABLED BUTTON */
+
+#submitBtn:disabled{
+
+    opacity:0.7;
+
+    cursor:not-allowed;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+.loader{
+
+    width:22px;
+    height:22px;
+
+    border:3px solid white;
+
+    border-top:3px solid transparent;
+
+    border-radius:50%;
+
+    display:inline-block;
+
+    animation:spin 1s linear infinite;
+}
+
+/* SPIN */
+
+@keyframes spin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* HIDDEN */
+
+.hidden{
+
+    display:none;
+}

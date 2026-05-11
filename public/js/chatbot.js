@@ -18,21 +18,45 @@ document.getElementById("chatBody");
 
 /* OPEN CHAT */
 
-chatToggle.onclick = () => {
+chatToggle.addEventListener(
+    "click",
+    () => {
 
-    chatContainer.style.display = "flex";
-};
+        if(
+            chatContainer.style.display
+            === "flex"
+        ){
+
+            chatContainer.style.display =
+            "none";
+
+        }else{
+
+            chatContainer.style.display =
+            "flex";
+        }
+    }
+);
 
 /* CLOSE CHAT */
 
-closeChat.onclick = () => {
+closeChat.addEventListener(
+    "click",
+    () => {
 
-    chatContainer.style.display = "none";
-};
+        chatContainer.style.display =
+        "none";
+    }
+);
 
-/* SEND MESSAGE */
+/* SEND BUTTON */
 
-sendBtn.onclick = sendMessage;
+sendBtn.addEventListener(
+    "click",
+    sendMessage
+);
+
+/* ENTER KEY */
 
 chatInput.addEventListener(
     "keypress",
@@ -67,18 +91,18 @@ async function sendMessage(){
 
     chatInput.value = "";
 
-    /* LOADING */
+    /* BOT LOADING */
 
-    const loadingDiv =
+    const botDiv =
     document.createElement("div");
 
-    loadingDiv.className =
+    botDiv.className =
     "bot-message";
 
-    loadingDiv.innerHTML =
+    botDiv.innerHTML =
     "Typing...";
 
-    chatBody.appendChild(loadingDiv);
+    chatBody.appendChild(botDiv);
 
     chatBody.scrollTop =
     chatBody.scrollHeight;
@@ -96,7 +120,6 @@ async function sendMessage(){
             },
 
             body:JSON.stringify({
-
                 message
             })
         });
@@ -104,15 +127,47 @@ async function sendMessage(){
         const data =
         await response.json();
 
-        loadingDiv.innerHTML =
-        data.reply;
+        botDiv.innerHTML =
+        formatResponse(data.reply);
 
     }catch(error){
 
-        loadingDiv.innerHTML =
-        "AI currently unavailable.";
+        botDiv.innerHTML =
+        "AI unavailable.";
     }
 
     chatBody.scrollTop =
     chatBody.scrollHeight;
+}
+function formatResponse(text){
+
+    return text
+
+    /* BOLD TEXT */
+
+    .replace(
+        /\*\*(.*?)\*\*/g,
+        "<h3>$1</h3>"
+    )
+
+    /* NUMBER LIST */
+
+    .replace(
+        /(\d+\.)/g,
+        "<br><b>$1</b>"
+    )
+
+    /* BULLET POINTS */
+
+    .replace(
+        /\*/g,
+        "•"
+    )
+
+    /* LINE BREAKS */
+
+    .replace(
+        /\n/g,
+        "<br>"
+    );
 }

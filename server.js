@@ -177,24 +177,29 @@ app.get("/", (req, res) => {
    SERVER
 ========================= */
 
-const PORT =
-process.env.PORT || 3000;
 /* =========================
    AI CHATBOT
 ========================= */
+
+
 
 app.post("/chat", async (req, res) => {
 
     try{
 
-        const {
+        const message =
+        req.body.message;
+
+        console.log(
+            "User Message:",
             message
-        } = req.body;
+        );
 
         const completion =
         await openai.chat.completions.create({
 
-            model:"llama-3.3-70b-versatile",
+            model:
+            "llama-3.3-70b-versatile",
 
             messages:[
 
@@ -202,18 +207,18 @@ app.post("/chat", async (req, res) => {
                     role:"system",
 
                     content:`
-You are an AI Sports Coach.
+You are a professional AI Sports Coach.
 
 You explain:
 - sports rules
-- techniques
-- health
 - exercises
-- foods to eat
+- diet plans
+- techniques
+- fitness
+- sports equipment
 - foods to avoid
-- sports training
 
-Give short professional answers.
+Give clean short answers.
                     `
                 },
 
@@ -222,8 +227,16 @@ Give short professional answers.
 
                     content:message
                 }
-            ]
+            ],
+
+            temperature:0.7,
+
+            max_tokens:300
         });
+
+        console.log(
+            "AI RESPONSE RECEIVED"
+        );
 
         res.json({
 
@@ -236,15 +249,24 @@ Give short professional answers.
 
     }catch(error){
 
-        console.log(error);
+        console.log(
+            "CHATBOT ERROR:",
+            error.message
+        );
 
         res.json({
 
             reply:
-            "AI is currently unavailable."
+            "AI server currently unavailable."
         });
     }
 });
+/* =========================
+   SERVER START
+========================= */
+
+const PORT =
+process.env.PORT || 3000;
 
 app.listen(PORT, () => {
 

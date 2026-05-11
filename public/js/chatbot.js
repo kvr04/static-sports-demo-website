@@ -1,41 +1,87 @@
+const chatToggle =
+document.getElementById("chatToggle");
+
+const chatContainer =
+document.getElementById("chatContainer");
+
+const closeChat =
+document.getElementById("closeChat");
+
 const sendBtn =
 document.getElementById("sendBtn");
 
-const userInput =
-document.getElementById("userInput");
+const chatInput =
+document.getElementById("chatInput");
 
-const chatBox =
-document.getElementById("chatBox");
+const chatBody =
+document.getElementById("chatBody");
 
-sendBtn.addEventListener(
-    "click",
-    async ()=>{
+/* OPEN CHAT */
+
+chatToggle.onclick = () => {
+
+    chatContainer.style.display = "flex";
+};
+
+/* CLOSE CHAT */
+
+closeChat.onclick = () => {
+
+    chatContainer.style.display = "none";
+};
+
+/* SEND MESSAGE */
+
+sendBtn.onclick = sendMessage;
+
+chatInput.addEventListener(
+    "keypress",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            sendMessage();
+        }
+    }
+);
+
+async function sendMessage(){
 
     const message =
-    userInput.value;
+    chatInput.value.trim();
 
-    if(!message) return;
+    if(message === "") return;
 
     /* USER MESSAGE */
 
-    chatBox.innerHTML += `
-    <div class="message user-message">
-        ${message}
-    </div>
-    `;
+    const userDiv =
+    document.createElement("div");
 
-    userInput.value = "";
+    userDiv.className =
+    "user-message";
+
+    userDiv.innerText =
+    message;
+
+    chatBody.appendChild(userDiv);
+
+    chatInput.value = "";
 
     /* LOADING */
 
-    chatBox.innerHTML += `
-    <div class="message bot-message" id="loading">
-        Thinking...
-    </div>
-    `;
+    const loadingDiv =
+    document.createElement("div");
 
-    chatBox.scrollTop =
-    chatBox.scrollHeight;
+    loadingDiv.className =
+    "bot-message";
+
+    loadingDiv.innerHTML =
+    "Typing...";
+
+    chatBody.appendChild(loadingDiv);
+
+    chatBody.scrollTop =
+    chatBody.scrollHeight;
 
     try{
 
@@ -45,10 +91,12 @@ sendBtn.addEventListener(
             method:"POST",
 
             headers:{
-                "Content-Type":"application/json"
+                "Content-Type":
+                "application/json"
             },
 
             body:JSON.stringify({
+
                 message
             })
         });
@@ -56,21 +104,15 @@ sendBtn.addEventListener(
         const data =
         await response.json();
 
-        document
-        .getElementById("loading")
-        .remove();
-
-        chatBox.innerHTML += `
-        <div class="message bot-message">
-            ${data.reply}
-        </div>
-        `;
-
-        chatBox.scrollTop =
-        chatBox.scrollHeight;
+        loadingDiv.innerHTML =
+        data.reply;
 
     }catch(error){
 
-        console.log(error);
+        loadingDiv.innerHTML =
+        "AI currently unavailable.";
     }
-});
+
+    chatBody.scrollTop =
+    chatBody.scrollHeight;
+}

@@ -1039,3 +1039,326 @@ footer{
 
     background:#333333;
 }
+/* =========================
+   CHATBOT TOGGLE
+========================= */
+
+.chatbot-toggle{
+
+    position:fixed;
+
+    top:20px;
+    right:20px;
+
+    width:75px;
+    height:75px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #00f0ff,
+        #d946ef
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    z-index:9999;
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.5);
+
+    animation:botGlow 2s infinite alternate;
+}
+
+.chatbot-toggle img{
+
+    width:45px;
+}
+
+@keyframes botGlow{
+
+    from{
+
+        transform:scale(1);
+
+        box-shadow:
+            0 0 10px #00f0ff;
+    }
+
+    to{
+
+        transform:scale(1.08);
+
+        box-shadow:
+            0 0 25px #d946ef;
+    }
+}
+
+/* =========================
+   CHAT CONTAINER
+========================= */
+
+.chatbot-container{
+
+    position:fixed;
+
+    top:110px;
+    right:20px;
+
+    width:400px;
+    height:700px;
+
+    background:
+    rgba(10,10,10,0.95);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    border:2px solid rgba(0,255,255,0.3);
+
+    backdrop-filter:blur(15px);
+
+    display:none;
+
+    flex-direction:column;
+
+    z-index:9999;
+
+    box-shadow:
+        0 0 30px rgba(0,255,255,0.25);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.chat-header{
+
+    height:90px;
+
+    background:linear-gradient(
+        135deg,
+        #00f0ff,
+        #d946ef
+    );
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px;
+}
+
+.chat-header-left{
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+}
+
+.chat-header-left img{
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    background:white;
+    padding:5px;
+}
+
+.chat-header-left h3{
+
+    font-size:24px;
+    color:white;
+}
+
+.chat-header-left span{
+
+    color:#00ff90;
+    font-size:14px;
+}
+
+.chat-header button{
+
+    background:none;
+    border:none;
+
+    color:white;
+
+    font-size:30px;
+
+    cursor:pointer;
+}
+
+/* =========================
+   CHAT BODY
+========================= */
+
+.chat-body{
+
+    flex:1;
+
+    padding:25px;
+
+    overflow-y:auto;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:20px;
+}
+
+/* USER MESSAGE */
+
+.user-message{
+
+    align-self:flex-end;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:18px 22px;
+
+    border-radius:20px 20px 5px 20px;
+
+    max-width:80%;
+
+    font-size:17px;
+
+    line-height:1.6;
+}
+
+/* BOT MESSAGE */
+
+.bot-message{
+
+    align-self:flex-start;
+
+    background:#1e1e1e;
+
+    color:white;
+
+    padding:18px 22px;
+
+    border-radius:20px 20px 20px 5px;
+
+    max-width:85%;
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+/* =========================
+   INPUT AREA
+========================= */
+
+.chat-input-area{
+
+    display:flex;
+
+    padding:20px;
+
+    gap:15px;
+
+    background:#111;
+}
+
+.chat-input-area input{
+
+    flex:1;
+
+    height:60px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:20px;
+
+    background:#1f1f1f;
+
+    color:white;
+
+    padding:0 20px;
+
+    font-size:16px;
+}
+
+.chat-input-area button{
+
+    width:60px;
+    height:60px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        135deg,
+        #00f0ff,
+        #d946ef
+    );
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.chat-input-area button:hover{
+
+    transform:scale(1.05);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+.chat-body::-webkit-scrollbar{
+
+    width:6px;
+}
+
+.chat-body::-webkit-scrollbar-thumb{
+
+    background:#00f0ff;
+
+    border-radius:20px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .chatbot-container{
+
+        width:95%;
+        height:85vh;
+
+        right:2.5%;
+        top:90px;
+    }
+
+    .chatbot-toggle{
+
+        width:65px;
+        height:65px;
+    }
+}

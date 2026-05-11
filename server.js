@@ -15,7 +15,10 @@ const openai =
 new OpenAI({
 
     apiKey:
-    process.env.OPENAI_API_KEY
+    process.env.GROQ_API_KEY,
+
+    baseURL:
+    "https://api.groq.com/openai/v1"
 });
 
 const app = express();
@@ -191,7 +194,7 @@ app.post("/chat", async (req, res) => {
         const completion =
         await openai.chat.completions.create({
 
-            model:"gpt-4.1-mini",
+            model:"llama-3.3-70b-versatile",
 
             messages:[
 
